@@ -53,27 +53,27 @@ const CandidateAddForm = ({ onClose }) => {
       </div>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <label className="block text-gray-700 mb-2" htmlFor="fio">
+          <label className="block text-gray-700 mb-2" htmlFor="name">
             Имя
           </label>
           <input
             className="w-full border border-gray-300 rounded-lg p-2"
             type="text"
-            id="fio"
-            name="fio"
+            id="name"
+            name="name"
             value={formData.name}
             onChange={handleChange}
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 mb-2" htmlFor="fio">
+          <label className="block text-gray-700 mb-2" htmlFor="surname">
             Фамилия
           </label>
           <input
             className="w-full border border-gray-300 rounded-lg p-2"
             type="text"
-            id="fio"
-            name="fio"
+            id="surname"
+            name="surname"
             value={formData.surname}
             onChange={handleChange}
           />
@@ -131,24 +131,6 @@ const CandidateAddForm = ({ onClose }) => {
             {SIGNS.map((item) => (<option>{item}</option>))}
           </select>
         </div>
-        {/* <div className="mb-4">
-          <label className="block text-gray-700 mb-2" htmlFor="tarot">
-            Расклад таро
-          </label>
-          <select
-            className="w-full border border-gray-300 rounded-lg p-2"
-            id="tarot"
-            name="tarot"
-            value={formData.tarot}
-            onChange={handleChange}
-          >
-            <option>Рыбы</option>
-            <option>Телец</option>
-            <option>Остальные</option>
-            <option>Телец</option>
-            <option>Телец</option>
-          </select>
-        </div> */}
         <div className="flex justify-center">
           <button className="bg-orange-500 rounded-lg px-4 py-2" type="submit">
             Добавить кандидата
