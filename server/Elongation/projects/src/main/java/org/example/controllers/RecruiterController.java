@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/recruiter")
 public class RecruiterController {
     private final RecruiterService recruiterService;

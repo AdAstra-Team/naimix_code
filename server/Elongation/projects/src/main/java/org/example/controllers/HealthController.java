@@ -14,6 +14,7 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import java.util.UUID;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/health")
 public class HealthController {
     private static final Logger logger = LogManager.getLogger(HealthController.class);
