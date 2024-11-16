@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-@RestController
-@RequestMapping("/tasks")
+//@RestController
+//@RequestMapping("/tasks")
 public class TaskController {
 
     @Autowired

@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-@RestController
-@RequestMapping("/projects")
+//@RestController
+//@RequestMapping("/projects")
 public class ProjectController {
     private final ProjectService projectService;
 
