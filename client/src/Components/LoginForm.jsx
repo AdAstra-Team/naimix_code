@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { setAuth } from "../redux/Slices/UserSlice";
-import bcrypt from "bcryptjs";
-import { buildCreateSlice } from "@reduxjs/toolkit";
+import bcrypt, { hash } from "bcryptjs";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
@@ -19,33 +20,38 @@ const LoginForm = () => {
     setError(null);
 
     try {
-      const salt = bcrypt.genSaltSync(10);
-      const hashedPassword = bcrypt.hashSync(password, salt);
+        const salt = bcrypt.genSaltSync(10);
+        const hashedPassword = bcrypt.hashSync(password, salt);
 
-      const response = await fetch("ссылка на апи", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          username: username,
-          password: hashedPassword
-        })
-      });
+        const response = await axios.post(
+            'http://194.87.186.59:8082/recruiter/auth',
+            {
+            name: username,
+            passwordHash: hashedPassword,
+            },
+            {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            }
+        );
 
-      if (!response.ok) {
-        setUsername("Афанасий");
-        var token = "tempToken";
-        dispatch(setAuth({ token, username: "Афанасий" }));
-        dispatch(navigate("/"));
-        return;
-        //throw new Error("Ошибка авторизации");
-      }
+        if (!response.status == 200) {
+            throw new Error("Ошибка авторизации");
+        }
 
-      const data = await response.json();
-      // Здесь вы можете сохранить токен или выполнить другие действия
-      dispatch(setAuth(data));
-      console.log("Успешный вход:", data);
+        const data = response.data;
+        var token = response.data.access_token;
+        // Разбиваем токен на части
+        const parts = token.split('$');
+        
+        // Получаем payload
+        setUsername(parts[0]);
+
+        // Здесь вы можете сохранить токен или выполнить другие действия
+        dispatch(setAuth({username, token}));
+        console.log("Успешный вход:", data);
+        navigate("/");
     } catch (err) {
       setError(err.message);
     } finally {
