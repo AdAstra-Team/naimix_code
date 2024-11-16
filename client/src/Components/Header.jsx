@@ -18,7 +18,7 @@ const Header = () => {
         <div className = "flex space-x-4">
           {auth.isAuthenticated ? (
               <button className = "bg-gray-500 px-4 py-2 rounded-full hover:bg-gray-600">
-                  <i className = "fas fa-user">Профиль</i>
+                  <i className = "fas fa-user">{auth.username}</i>
               </button>
           ) : (
             <>
