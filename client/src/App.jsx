@@ -9,6 +9,7 @@ import Candidates from "./Pages/Candidates";
 import Teams from "./Pages/Teams";
 import Header from "./Components/Header";
 import SignInUpPage from "./Pages/SignInUpPage"
+import CandidateAddForm from "./Components/CandidateAddForm";
 
 const App = () => {
 
@@ -17,17 +18,22 @@ const App = () => {
   return (
     <Router>
       <Header />
-      <div className="container mx-auto mt-8">
-        <Navigation />
-        <div className="mt-8">
-          <Routes>
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/candidates" element={<Candidates />} />
-            <Route path="/teams" element={<Teams />} />
-            <Route path="/SignInUpPage" element={<SignInUpPage/>} />
-          </Routes>
+        {auth.isAuthenticated ? (
+          <div className="container mx-auto mt-8">
+          <Navigation />
+          <div className="mt-8">
+            <Routes>
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/candidates" element={<Candidates />} />
+              <Route path="/teams" element={<Teams />} />
+              <Route path="/SignInUpPage" element={<SignInUpPage/>} />
+              <Route path="/devPath" element={<CandidateAddForm/>}/>
+            </Routes>
+          </div>
         </div>
-      </div>
+        ) : 
+        (<SignInUpPage/>)}
+      
     </Router>
   );
 };
