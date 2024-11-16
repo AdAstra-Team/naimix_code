@@ -21,7 +21,7 @@ public class SwaggerConfiguration {
     public OpenAPI customOpenAPI() {
         OpenAPI openAPI = new OpenAPI()
                 .servers(List.of(
-                        new Server().url("http://detulie.space:8082").description("Production Server"),
+                        new Server().url("http://194.87.186.59:8082").description("Production Server"),
                         new Server().url("http://localhost:8082").description("Local Development Server")
                 ))
                 .addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
