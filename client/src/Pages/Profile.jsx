@@ -1,21 +1,16 @@
 import React from "react";
 import UserCard from "../Components/UserCard";
+import { useSelector } from "react-redux";
 
-const user = {
-  name: "Алексей",
-  surname: "Антошкин-круглов",
-  number: "+7 (800) 555-35-35",
-  email: "imposter@sus.io",
-  birthday: Date.now(),
-  sign: 2
-};
 
 const Profile = () => {
+  var user = useSelector(state => state.auth); 
+
   return (
-    <div className="container mx-auto max-w-[1320px]">
-      <UserCard user={user} />
-    </div>
-  );
+    <UserCard user={user}>
+      <button className="bg-purple button text-white bg-teal  hover:bg-gray focus:ring-2 focus:ring-purple focus:ring-opacity-50 transition-all">Редактировать</button>
+    </UserCard>
+  )
 };
 
 export default Profile;

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import bcrypt from "bcryptjs";
 import { setAuth } from "../redux/Slices/UserSlice";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const SignUpForm = () => {
   const navigate = useNavigate();
@@ -17,33 +18,36 @@ const SignUpForm = () => {
     setError(null);
 
     try {
-      const salt = bcrypt.genSaltSync(10);
-      const hashedPassword = bcrypt.hashSync(password, salt);
+        const salt = bcrypt.genSaltSync(10);
+        const hashedPassword = bcrypt.hashSync(password, salt);
 
-      const response = await fetch("ссылка на апи", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          username: username,
-          password: hashedPassword,
-          email: email
-        })
-      });
+        const response = await axios.post(
+            'http://194.87.186.59:8082/recruiter/auth',
+            {
+                name: username,
+                passwordHash: hashedPassword,
+                // email: email,
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        );
 
-      if (!response.ok) {
-        throw new Error("Ошибка регистрации");
-      }
 
-      const data = await response.json();
-      // Здесь вы можете сохранить токен или выполнить другие действия
-      navigate("/SignInUpPage/#login");
-      console.log("Успешный вход:", data);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
+        if (!response.ok) {
+            throw new Error("Ошибка регистрации");
+        }
+
+        const data = await response.json();
+        // Здесь вы можете сохранить токен или выполнить другие действия
+        navigate("/SignInUpPage/#login");
+        console.log("Успешный вход:", data);
+        } catch (err) {
+        setError(err.message);
+        } finally {
+        setLoading(false);
     }
   };
   return (
