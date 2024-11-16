@@ -1,8 +1,11 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import ProfileDropdown from "./ProfileDropDown";
+import { clearAuth } from "../redux/Slices/UserSlice";
 
 const Header = () => {
   const auth = useSelector((state) => state.auth)
+  const dispatch = useDispatch();
 
   return (
     <div className="flex justify-center h-[80px] w-full border-b-[1px] border-iridium">
@@ -17,9 +20,7 @@ const Header = () => {
         </div>
         <div className = "flex space-x-4">
           {auth.isAuthenticated ? (
-              <button className = "bg-gray-500 px-4 py-2 rounded-full hover:bg-gray-600">
-                  <i className = "fas fa-user">{auth.username}</i>
-              </button>
+              <ProfileDropdown username={auth.username} />
           ) : (
             <>
               <a href="/SignInUpPage/#login" className="bg-blue-500 px-4 py-2 rounded hover:bg-blue-600">
