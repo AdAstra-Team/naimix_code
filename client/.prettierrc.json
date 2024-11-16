@@ -1,0 +1,17 @@
+{
+  "semi": true,
+  "trailingComma": "none",
+  "singleQuote": false,
+  "printWidth": 100,
+  "arrowParens": "always",
+  "bracketSpacing": true,
+  "endOfLine": "lf",
+  "overrides": [
+    {
+      "files": ["**/*.json", "**/*.yml", "**/*.jsx", "**/*.js"],
+      "options": {
+        "tabWidth": 2
+      }
+    }
+  ]
+}

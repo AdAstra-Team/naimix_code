@@ -1,21 +1,20 @@
-import { createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState: {
     isAuthenticated: false,
     token: null,
     email: null,
-    username: null,
+    username: null
   },
   reducers: {
     setAuth: (state, action) => {
       state.isAuthenticated = true;
       state.token = action.payload.token;
-      state.username = action.payload.username
+      state.username = action.payload.username;
 
-      
       // state.email = action.payload.data.user;
 
       // const url = 'https://ad-4stra.ru/auth/admin/realms/auth/users/415939f0-0c06-4a89-b35c-00aa7363f72d';
@@ -37,16 +36,15 @@ const authSlice = createSlice({
       //       console.error('Error occurred:', error.response ? error.response.data : error.message);
       //   });
       // } catch (exception){
-      //     console.log(exception);            
+      //     console.log(exception);
       // }
-
     },
     clearAuth: (state) => {
       state.isAuthenticated = false;
       state.token = null;
       state.username = null;
-    },
-  },
+    }
+  }
 });
 
 export const { setAuth, clearAuth } = authSlice.actions;
