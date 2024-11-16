@@ -34,8 +34,8 @@ public class Candidate {
     @ManyToMany
     @JoinTable(
             name = "team_candidate",
-            joinColumns = @JoinColumn(name = "team_id"),
-            inverseJoinColumns = @JoinColumn(name = "candidate_id")
+            joinColumns = @JoinColumn(name = "candidate_id"),
+            inverseJoinColumns = @JoinColumn(name = "team_id")
     )
     private List<Team> teams = new ArrayList<>();
 
