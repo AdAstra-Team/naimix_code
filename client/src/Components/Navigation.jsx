@@ -5,7 +5,7 @@ const Navigation = () => {
   const tabs = [
     { name: "Профиль", path: "/profile" },
     { name: "Кандидаты", path: "/candidates" },
-    { name: "Команды", path: "/teams" },
+    { name: "Команды", path: "/teams" }
   ];
 
   return (
