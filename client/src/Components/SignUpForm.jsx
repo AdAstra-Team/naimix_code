@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import { setAuth } from "../redux/Slices/UserSlice";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useDispatch } from "react-redux";
 
 const SignUpForm = () => {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ const SignUpForm = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Предотвращаем перезагрузку страницы
@@ -22,28 +24,33 @@ const SignUpForm = () => {
         const hashedPassword = bcrypt.hashSync(password, salt);
 
         const response = await axios.post(
-            'http://194.87.186.59:8082/recruiter/auth',
+            'http://194.87.186.59:8082/recruiter/registration',
             {
                 name: username,
-                passwordHash: hashedPassword,
-                // email: email,
+                passwordHash: hashedPassword
             },
             {
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Accept': '*/*',
+                    'Content-Type': 'application/json'
                 },
             }
         );
 
 
-        if (!response.ok) {
+        if (response.status >= 400) {
+            console.log(response.statusText);            
             throw new Error("Ошибка регистрации");
         }
 
-        const data = await response.json();
-        // Здесь вы можете сохранить токен или выполнить другие действия
-        navigate("/SignInUpPage/#login");
-        console.log("Успешный вход:", data);
+        var token = response.data.access_token;
+        setUsername(response.data.name);
+        var userId = response.data.id;
+
+        
+        dispatch(setAuth({token, username}));
+        navigate("/");
+        console.log("Успешный вход:", response.data);
         } catch (err) {
         setError(err.message);
         } finally {

@@ -36,7 +36,7 @@ const LoginForm = () => {
             }
         );
 
-        if (!response.status == 200) {
+        if (!response.status >= 400) {
             throw new Error("Ошибка авторизации");
         }
 

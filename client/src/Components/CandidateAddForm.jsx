@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 
 const CandidateAddForm = ({ onClose }) => {
@@ -20,6 +21,27 @@ const CandidateAddForm = ({ onClose }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    axios.post("http://194.87.186.59:8082/candidate", 
+        {
+            name: "string",
+            surname: "string",
+            photo: [
+                "string"
+            ],
+            birthday: new Date(formData.dob).getMilliseconds(),
+            sign: 0,
+            typeOfDestinyCompute: 0,
+            phone: "",
+            email: "",
+        },
+        {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }
+    )
+
     console.log(formData);
   };
 
@@ -102,7 +124,7 @@ const CandidateAddForm = ({ onClose }) => {
             <option>Телец</option>
           </select>
         </div>
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label className="block text-gray-700 mb-2" htmlFor="tarot">
             Расклад таро
           </label>
@@ -119,7 +141,7 @@ const CandidateAddForm = ({ onClose }) => {
             <option>Телец</option>
             <option>Телец</option>
           </select>
-        </div>
+        </div> */}
         <div className="flex justify-center">
           <button className="bg-orange-500 rounded-lg px-4 py-2" type="submit">
             Добавить кандидата
