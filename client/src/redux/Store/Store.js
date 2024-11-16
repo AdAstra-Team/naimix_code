@@ -1,5 +1,6 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import authReducer from "../Slices/UserSlice";
+import popupReducer from "../Slices/PopupSlice";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // Используем localStorage
 
@@ -10,7 +11,8 @@ const persistConfig = {
 
 // Combine all reducers
 const rootReducer = combineReducers({
-  auth: authReducer
+  auth: authReducer,
+  popup: popupReducer,
   // projects: projectReducer,
   // tasks: taskReducer,
 });

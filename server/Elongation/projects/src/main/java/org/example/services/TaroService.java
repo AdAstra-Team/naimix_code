@@ -29,7 +29,8 @@ public class TaroService {
             int cardValue = random.nextInt(0, TOTAL_CARD_COUNT);
             seq[i] = taroClient.getCardByValue(cardValue);
         }
-        return new TaroSequence(seq, candidate, team);
+        String candidateFullName = candidate.getName() + (candidate.getSurname() == null ? "" : " " + candidate.getSurname());
+        return new TaroSequence(seq, candidateFullName, team.getName());
     }
 
     private int generateTotalDestiny(Candidate candidate, Team team) {

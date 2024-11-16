@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { SIGNS } from "../Utils/constants";
 
 const CandidateAddForm = ({ onClose }) => {
   const [formData, setFormData] = useState({
@@ -8,7 +9,6 @@ const CandidateAddForm = ({ onClose }) => {
     email: "",
     dob: "",
     zodiac: "Рыбы",
-    tarot: "Рыбы"
   });
 
   const handleChange = (e) => {
@@ -19,21 +19,17 @@ const CandidateAddForm = ({ onClose }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    axios.post("http://194.87.186.59:8082/candidate", 
+    var response = await axios.post("http://194.87.186.59:8082/candidate", 
         {
-            name: "string",
-            surname: "string",
-            photo: [
-                "string"
-            ],
-            birthday: new Date(formData.dob).getMilliseconds(),
-            sign: 0,
+            name: formData.name,
+            surname: formData.surname,
+            photo: [],
+            birthday: new Date(formData.dob).getTime()/1000,
+            sign: SIGNS.findIndex((val, index) => val == formData.zodiac),
             typeOfDestinyCompute: 0,
-            phone: "",
-            email: "",
         },
         {
             headers: {
@@ -41,6 +37,8 @@ const CandidateAddForm = ({ onClose }) => {
             },
         }
     )
+
+    onClose();
 
     console.log(formData);
   };
@@ -56,14 +54,27 @@ const CandidateAddForm = ({ onClose }) => {
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-gray-700 mb-2" htmlFor="fio">
-            ФИО
+            Имя
           </label>
           <input
             className="w-full border border-gray-300 rounded-lg p-2"
             type="text"
             id="fio"
             name="fio"
-            value={formData.fio}
+            value={formData.name}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 mb-2" htmlFor="fio">
+            Фамилия
+          </label>
+          <input
+            className="w-full border border-gray-300 rounded-lg p-2"
+            type="text"
+            id="fio"
+            name="fio"
+            value={formData.surname}
             onChange={handleChange}
           />
         </div>
@@ -117,11 +128,7 @@ const CandidateAddForm = ({ onClose }) => {
             value={formData.zodiac}
             onChange={handleChange}
           >
-            <option>Рыбы</option>
-            <option>Телец</option>
-            <option>Остальные</option>
-            <option>Телец</option>
-            <option>Телец</option>
+            {SIGNS.map((item) => (<option>{item}</option>))}
           </select>
         </div>
         {/* <div className="mb-4">
