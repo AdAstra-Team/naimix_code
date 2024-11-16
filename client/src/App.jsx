@@ -14,10 +14,17 @@ import DevComponent from "./Components/devComponent";
 
 const App = () => {
   const auth = useSelector((state) => state.auth);
+  const popup = useSelector((state) => state.popup)
+
 
   return (
     <Router>
       <Header />
+      {popup.visible && (
+          <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-4 shadow-md rounded-lg">
+              Ура!
+          </div>
+      )}
       {auth.isAuthenticated ? (
         <div className="mx-auto mt-8">
           <Navigation />
