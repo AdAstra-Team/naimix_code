@@ -26,17 +26,17 @@ const LoginForm = () => {
         const response = await axios.post(
             'http://194.87.186.59:8082/recruiter/auth',
             {
-            name: username,
-            passwordHash: hashedPassword,
+                name: username,
+                passwordHash: hashedPassword,
             },
             {
-            headers: {
-                'Content-Type': 'application/json',
-            },
+                headers: {
+                    'Content-Type': 'application/json',
+                },
             }
         );
 
-        if (!response.status == 200) {
+        if (!response.status >= 400) {
             throw new Error("Ошибка авторизации");
         }
 

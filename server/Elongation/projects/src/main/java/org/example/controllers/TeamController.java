@@ -1,37 +1,49 @@
 package org.example.controllers;
 
+import org.example.models.dao.CandidateResponse;
 import org.example.models.dao.TeamRequest;
 import org.example.models.dao.TeamResponse;
-import org.example.models.entities.Task;
 import org.example.models.entities.Team;
-import org.example.services.TaskService;
+import org.example.services.RecruiterService;
 import org.example.services.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/teams")
 public class TeamController {
 
-    @Autowired
     private TeamService teamService;
+    private RecruiterService recruiterService;
+
+    @Autowired
+    public TeamController(TeamService teamService, RecruiterService recruiterService) {
+        this.teamService = teamService;
+        this.recruiterService = recruiterService;
+    }
 
     @GetMapping
-    public List<Team> getAllTasks() {
-        return teamService.getAllTasks();
+    public List<TeamResponse> getAllTeams() {
+        return teamService.getAllTeams().stream()
+                .map(TeamResponse::new)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
-    public Team getTeamById(@PathVariable UUID id) {
-        return teamService.getTeamById(id);
+    public TeamResponse getTeamById(@PathVariable UUID id) {
+        return new TeamResponse(teamService.getTeamById(id));
     }
 
     @PostMapping
-    public TeamResponse createTeam(@RequestBody TeamRequest team) {
-        return teamService.saveTeam(team);
+    public TeamResponse createTeam(@RequestBody TeamRequest teamRequest) {
+        var team = new Team(teamRequest);
+        var recruiter = recruiterService.getRecruiterById(teamRequest.getRecruiterId());
+        team.setRecruiter(recruiter);
+        return new TeamResponse(teamService.saveTeam(team));
     }
 
     @DeleteMapping("/{id}")

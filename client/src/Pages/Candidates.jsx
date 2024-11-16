@@ -2,13 +2,15 @@ import React from "react";
 import { generateRandomUsers } from "../Utils/utils";
 import UserCard from "../Components/UserCard";
 import CandidateAddForm from "../Components/CandidateAddForm";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const users = generateRandomUsers(30);
 
 const Candidates = () => {
-  const { team = "Некой команды" } = useParams();
+  const navigate = useNavigate();
+
+  const { teamId = "Некой команды" } = useParams();
 
   const [isCreateCandidateModalOpen, setIsCreateCandidateModalOpen] = useState(false);
 
@@ -20,9 +22,13 @@ const Candidates = () => {
     setIsCreateCandidateModalOpen(false);
   };
 
+  const handleOpenTaroCandidatePage = (userId) => {
+    navigate(`/candidates/${teamId}/taro?userId=${userId}`);
+  }
+
   return (
     <>
-      <div className="flex flex-col">
+      <div className="container mx-auto max-w-[1320px] flex flex-col">
         <div className="flex justify-between">
           <button
             className="button text-white bg-red hover:bg-orange"
@@ -30,12 +36,17 @@ const Candidates = () => {
           >
             Добавить кандидата
           </button>
-          <button className="button bg-orange hover:bg-red">Выбор для "{team}"</button>
+          <button className="button bg-orange hover:bg-red">Выбор для "{teamId}"</button>
         </div>
         <div className="flex flex-wrap gap-8 justify-center mt-8">
           {users.map((user, index) => (
             <UserCard key={index} user={user}>
-              <button className="button text-white bg-teal hover:bg-gray">Разложить таро</button>
+              <button
+                className="button text-white bg-teal hover:bg-gray"
+                onClick={() => handleOpenTaroCandidatePage(user.id)}
+              >
+                Разложить таро
+              </button>
             </UserCard>
           ))}
         </div>

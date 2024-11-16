@@ -39,7 +39,7 @@ public class CandidateController {
         return new CandidateResponse(candidateService.getCandidateById(id));
     }
 
-    @GetMapping("/{teamId}")
+    @GetMapping("/team/{teamId}")
     public List<CandidateResponse> getCandidatesByTeamId(@PathVariable UUID teamId) {
         var candidates = candidateService.getCandidatesByTeamId(teamId);
 

@@ -1,6 +1,8 @@
 package org.example.models.entities;
 
 import jakarta.persistence.*;
+import org.example.models.dao.TeamRequest;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -25,6 +27,14 @@ public class Team {
     @ManyToOne
     @JoinColumn(name = "recruiter_id", nullable = false)
     private Recruiter recruiter;
+
+    public Team() {
+    }
+
+    public Team(TeamRequest team) {
+        this.name = team.getName();
+        this.signs = team.getSigns();
+    }
 
     public UUID getId() {
         return id;

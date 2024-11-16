@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import bcrypt from "bcryptjs";
 import { setAuth } from "../redux/Slices/UserSlice";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useDispatch } from "react-redux";
 
 const SignUpForm = () => {
   const navigate = useNavigate();
@@ -10,6 +12,7 @@ const SignUpForm = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Предотвращаем перезагрузку страницы
@@ -17,33 +20,41 @@ const SignUpForm = () => {
     setError(null);
 
     try {
-      const salt = bcrypt.genSaltSync(10);
-      const hashedPassword = bcrypt.hashSync(password, salt);
+        const salt = bcrypt.genSaltSync(10);
+        const hashedPassword = bcrypt.hashSync(password, salt);
 
-      const response = await fetch("ссылка на апи", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          username: username,
-          password: hashedPassword,
-          email: email
-        })
-      });
+        const response = await axios.post(
+            'http://194.87.186.59:8082/recruiter/registration',
+            {
+                name: username,
+                passwordHash: hashedPassword
+            },
+            {
+                headers: {
+                    'Accept': '*/*',
+                    'Content-Type': 'application/json'
+                },
+            }
+        );
 
-      if (!response.ok) {
-        throw new Error("Ошибка регистрации");
-      }
 
-      const data = await response.json();
-      // Здесь вы можете сохранить токен или выполнить другие действия
-      navigate("/SignInUpPage/#login");
-      console.log("Успешный вход:", data);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
+        if (response.status >= 400) {
+            console.log(response.statusText);            
+            throw new Error("Ошибка регистрации");
+        }
+
+        var token = response.data.access_token;
+        setUsername(response.data.name);
+        var userId = response.data.id;
+
+        
+        dispatch(setAuth({token, username}));
+        navigate("/");
+        console.log("Успешный вход:", response.data);
+        } catch (err) {
+        setError(err.message);
+        } finally {
+        setLoading(false);
     }
   };
   return (

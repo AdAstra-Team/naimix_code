@@ -36,7 +36,6 @@ public class RecruiterController {
     public RegistrationResponse addRecruiter(@RequestBody RecruiterRequest recruiterRequest) {
         var recruiter = new Recruiter(recruiterRequest);
         var model = recruiterService.saveRecruiter(recruiter);
-
         return new RegistrationResponse(model, authService.GenerateJwtToken(model));
     }
 

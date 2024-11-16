@@ -1,16 +1,16 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import Navigation from "./Components/Navigation";
 
 import Profile from "./Pages/Profile";
 import Candidates from "./Pages/Candidates";
+import CandidatesTaro from "./Pages/CandidatesTaro";
 import Teams from "./Pages/Teams";
 import Header from "./Components/Header";
-import SignInUpPage from "./Pages/SignInUpPage"
+import SignInUpPage from "./Pages/SignInUpPage";
 import DevComponent from "./Components/devComponent";
-
 
 const App = () => {
   const auth = useSelector((state) => state.auth);
@@ -19,16 +19,19 @@ const App = () => {
     <Router>
       <Header />
       {auth.isAuthenticated ? (
-        <div className="container max-w-[1320px] mx-auto mt-8">
+        <div className="mx-auto mt-8">
           <Navigation />
           <div className="mt-8">
             <Routes>
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/candidates" element={<Candidates />} />
-              <Route path="/teams" element={<Teams />} />
-              <Route path="/SignInUpPage" element={<SignInUpPage/>} />
-              <Route path="/devPath" element={ <DevComponent/> }/>
+              <Route path="/" element={<Navigate to="/profile" />} />
 
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/candidates" element={<Navigate to="/candidates/aboba" />} />
+              <Route path="/candidates/:teamId" element={<Candidates />} />
+              <Route path="/candidates/:teamId/taro" element={<CandidatesTaro />} />
+              <Route path="/teams" element={<Teams />} />
+              <Route path="/SignInUpPage" element={<SignInUpPage />} />
+              <Route path="/devPath" element={<DevComponent />} />
             </Routes>
           </div>
         </div>

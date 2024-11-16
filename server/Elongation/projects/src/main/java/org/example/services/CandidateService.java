@@ -22,7 +22,7 @@ public class CandidateService {
     }
 
     public List<Candidate> getCandidatesByTeamId(UUID teamId) {
-        return candidateRepository.findByTeams(teamId);
+        return candidateRepository.findByTeamsId(teamId);
     }
 
     public Candidate getCandidateById(UUID id) {

@@ -9,7 +9,7 @@ const Navigation = () => {
   ];
 
   return (
-    <nav className="flex h-[56px] max-w-[1320px] gap-[2px] rounded-lg overflow-hidden">
+    <nav className="flex h-[56px] max-w-[1320px] gap-[2px] rounded-lg overflow-hidden mx-auto">
       {tabs.map((tab) => (
         <NavLink
           key={tab.name}
