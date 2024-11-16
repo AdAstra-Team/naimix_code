@@ -14,6 +14,9 @@ public class CandidateResponse {
     private Integer destiny;
     private Integer sign;
 
+    public CandidateResponse() {
+    }
+
     public CandidateResponse(Candidate candidate){
         id = candidate.getId();
         name = candidate.getName();

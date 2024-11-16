@@ -12,7 +12,15 @@ public class Recruiter {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
+    @Column(unique = true)
     private String name;
+    private String email;
+    private String publicName;
+    private String surname;
+    private Long birthday;
+    private Integer sign;
+    private String number;
+    private ArrayList<Byte> photo;
     private String passwordHash;
 
     @OneToMany(mappedBy = "recruiter", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -24,6 +32,13 @@ public class Recruiter {
     public Recruiter(RecruiterRequest recruiterRequest) {
         name = recruiterRequest.getName();
         passwordHash = recruiterRequest.getPasswordHash();
+        email = recruiterRequest.getEmail();
+        publicName = recruiterRequest.getPublicName();
+        surname = recruiterRequest.getSurname();
+        birthday = recruiterRequest.getBirthday();
+        sign = recruiterRequest.getSign();
+        number = recruiterRequest.getNumber();
+        photo = recruiterRequest.getPhoto();
     }
 
     public UUID getId() {
@@ -42,12 +57,60 @@ public class Recruiter {
         this.name = name;
     }
 
-    public List<Team> getTeams() {
-        return teams;
+    public String getEmail() {
+        return email;
     }
 
-    public void setTeams(List<Team> teams) {
-        this.teams = teams;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPublicName() {
+        return publicName;
+    }
+
+    public void setPublicName(String publicName) {
+        this.publicName = publicName;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public long getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(long birthday) {
+        this.birthday = birthday;
+    }
+
+    public Integer getSign() {
+        return sign;
+    }
+
+    public void setSign(Integer sign) {
+        this.sign = sign;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public ArrayList<Byte> getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(ArrayList<Byte> photo) {
+        this.photo = photo;
     }
 
     public String getPasswordHash() {
@@ -56,5 +119,13 @@ public class Recruiter {
 
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
+    }
+
+    public List<Team> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
     }
 }
