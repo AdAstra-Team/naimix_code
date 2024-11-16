@@ -34,7 +34,9 @@ public class TaroService {
     }
 
     private int generateTotalDestiny(Candidate candidate, Team team) {
-        return candidate.getDestiny() ^ team.getDestiny();
+        int candidateDest = candidate.getDestiny() == null ? 0 : candidate.getDestiny();
+        int teamDest = team.getDestiny() == null ? 0 : team.getDestiny();
+        return candidateDest ^ teamDest;
     }
 
     public List<TaroCard> getAllCards() {
