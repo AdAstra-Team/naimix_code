@@ -28,7 +28,7 @@ public class CandidateController {
     }
 
     @PostMapping
-    public CandidateResponse addCandidate(@RequestBody CandidateRequest candidateRequest) {
+    public CandidateResponse createCandidate(@RequestBody CandidateRequest candidateRequest) {
         var destiny = destinyComputeService.getDestinyByType(candidateRequest.getTypeOfDestinyCompute(),candidateRequest);
         var t = new Candidate(candidateRequest,destiny);
         var y = candidateService.saveCandidate(t);

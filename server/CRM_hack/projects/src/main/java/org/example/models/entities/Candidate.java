@@ -19,6 +19,9 @@ public class Candidate {
     private Integer destiny;
     private Integer sign;
 
+    public Candidate() {
+    }
+
     public Candidate(CandidateRequest candidateRequest, int destiny){
         name = candidateRequest.getName();
         surname = candidateRequest.getSurname();
@@ -27,7 +30,13 @@ public class Candidate {
         this.destiny = destiny;
         sign = candidateRequest.getSign();
     }
-    @ManyToMany(mappedBy = "candidates")
+
+    @ManyToMany
+    @JoinTable(
+            name = "team_candidate",
+            joinColumns = @JoinColumn(name = "team_id"),
+            inverseJoinColumns = @JoinColumn(name = "candidate_id")
+    )
     private List<Team> teams = new ArrayList<>();
 
     public UUID getId() {
