@@ -1,5 +1,6 @@
 package org.example.services;
 
+import org.example.models.dao.RecruiterResponse;
 import org.example.models.entities.Candidate;
 import org.example.models.entities.Recruiter;
 import org.example.repositories.CandidateRepository;
@@ -38,5 +39,9 @@ public class RecruiterService {
 
     public void deleteProject(UUID id) {
         recruiterRepository.deleteById(id);
+    }
+
+    public Recruiter updateRecruiter(Recruiter recruiter) {
+        return recruiterRepository.saveAndFlush(recruiter);
     }
 }
