@@ -1,10 +1,12 @@
 package org.example.models.entities;
 
 import jakarta.persistence.*;
+import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
 @Entity
+//@Component
 public class Task {
 
     @Id

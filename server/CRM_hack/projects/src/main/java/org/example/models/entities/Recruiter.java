@@ -1,6 +1,8 @@
 package org.example.models.entities;
 
 import jakarta.persistence.*;
+import org.example.models.dao.RecruiterRequest;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -11,11 +13,18 @@ public class Recruiter {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String name;
-    private Integer destiny;
-    private ArrayList<Integer> signs;
+    private String passwordHash;
 
     @OneToMany(mappedBy = "recruiter", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Team> teams = new ArrayList<>();
+
+    public Recruiter() {
+    }
+
+    public Recruiter(RecruiterRequest recruiterRequest) {
+        name = recruiterRequest.getName();
+        passwordHash = recruiterRequest.getPasswordHash();
+    }
 
     public UUID getId() {
         return id;
@@ -33,27 +42,19 @@ public class Recruiter {
         this.name = name;
     }
 
-    public Integer getDestiny() {
-        return destiny;
-    }
-
-    public void setDestiny(Integer destiny) {
-        this.destiny = destiny;
-    }
-
-    public ArrayList<Integer> getSigns() {
-        return signs;
-    }
-
-    public void setSigns(ArrayList<Integer> signs) {
-        this.signs = signs;
-    }
-
     public List<Team> getTeams() {
         return teams;
     }
 
     public void setTeams(List<Team> teams) {
         this.teams = teams;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 }
