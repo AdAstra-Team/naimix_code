@@ -34,6 +34,20 @@ public class CandidateController {
         this.teamService = teamService;
     }
 
+    @GetMapping
+    public List<CandidateResponse> getAllCandidates() {
+        return candidateService.getAll().stream()
+                .map(CandidateResponse::new)
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("/page")
+    public List<CandidateResponse> getAllCandidates(@RequestParam int offset, @RequestParam int limit) {
+        return candidateService.getAllWithPagination(offset, limit).stream()
+                .map(CandidateResponse::new)
+                .collect(Collectors.toList());
+    }
+
     @GetMapping("/{id}")
     public CandidateResponse getCandidateById(@PathVariable UUID id) {
         return new CandidateResponse(candidateService.getCandidateById(id));

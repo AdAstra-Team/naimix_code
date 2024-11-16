@@ -4,6 +4,8 @@ import org.example.models.entities.Candidate;
 import org.example.repositories.CandidateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.UUID;
@@ -19,6 +21,11 @@ public class CandidateService {
 
     public List<Candidate> getAll() {
         return candidateRepository.findAll();
+    }
+
+    public List<Candidate> getAllWithPagination(int page, int limit) {
+        Pageable pageable = (Pageable) PageRequest.of(page, limit);
+        return candidateRepository.findAll(pageable).stream().toList();
     }
 
     public List<Candidate> getCandidatesByTeamId(UUID teamId) {

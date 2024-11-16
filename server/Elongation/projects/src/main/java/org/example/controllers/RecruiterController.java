@@ -46,4 +46,9 @@ public class RecruiterController {
         auth.setAccessToken(authService.GenerateJwtToken(model));
         return auth;
     }
+
+    @PutMapping
+    public RecruiterResponse updateRecruiter(@RequestBody RecruiterRequest recruiterRequest) {
+        return new RecruiterResponse(recruiterService.updateRecruiter(new Recruiter(recruiterRequest)));
+    }
 }
