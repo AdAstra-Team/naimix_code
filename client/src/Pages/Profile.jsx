@@ -11,7 +11,11 @@ const user = {
 };
 
 const Profile = () => {
-  return <UserCard user={user} />;
+  return (
+    <div className="container mx-auto max-w-[1320px]">
+      <UserCard user={user} />
+    </div>
+  );
 };
 
 export default Profile;

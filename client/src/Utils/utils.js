@@ -1,10 +1,14 @@
 export const formatBirthday = (milliseconds) => {
   const date = new Date(milliseconds);
+  
   const month = date.toLocaleString("default", { month: "long" });
   const day = date.getDate();
   const year = date.getFullYear();
 
-  return `${month} ${day}, ${year}`;
+  const hours = date.getHours().toString().padStart(2, "0");
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+
+  return `${month} ${day}, ${year} at ${hours}:${minutes}`;
 };
 
 export const generateRandomUsers = (count) => {
@@ -37,6 +41,7 @@ export const generateRandomUsers = (count) => {
 
   for (let i = 0; i < count; i++) {
     const user = {
+      id: i.toString(),
       name: names[Math.floor(Math.random() * names.length)],
       surname: surnames[Math.floor(Math.random() * surnames.length)],
       number: `+7 (${Math.floor(Math.random() * 900) + 100}) ${Math.floor(Math.random() * 900) + 100}-${Math.floor(Math.random() * 90) + 10}-${Math.floor(Math.random() * 90) + 10}`,
