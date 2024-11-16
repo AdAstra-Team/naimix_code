@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
-const CandidateAddForm = (OnClose) => {
-
+const CandidateAddForm = ({ onClose }) => {
     const [formData, setFormData] = useState({
         fio: '',
         phone: '',
@@ -28,7 +27,7 @@ const CandidateAddForm = (OnClose) => {
             <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-lg">
                 <div className="flex justify-between items-center mb-4">
                     <h2 className="text-xl font-bold">Добавление кандидата</h2>
-                    <button className="text-red-500 text-xl" onClick={OnClose}>&times;</button>
+                    <button className="text-red-500 text-xl" onClick={onClose}>&times;</button>
                 </div>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
