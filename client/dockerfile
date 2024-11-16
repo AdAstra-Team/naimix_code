@@ -1,0 +1,23 @@
+FROM node:18 AS build
+
+WORKDIR /client
+
+# Copy package.json and package-lock.json (if present)
+COPY package.json package-lock.json* ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of your application's code
+COPY public/ ./public/
+COPY src/ ./src/
+COPY tailwind.config.js ./
+
+# Build Tailwind CSS
+RUN npx tailwindcss -i ./src/App.css -o ./src/Tailwind.css
+
+# Expose the port (if needed)
+# EXPOSE 3000
+
+# Start the application
+CMD ["npm", "start"]
