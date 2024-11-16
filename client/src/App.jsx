@@ -9,7 +9,6 @@ import Candidates from "./Pages/Candidates";
 import Teams from "./Pages/Teams";
 import Header from "./Components/Header";
 import SignInUpPage from "./Pages/SignInUpPage"
-import CandidateAddForm from "./Components/CandidateAddForm";
 import DevComponent from "./Components/devComponent";
 
 
