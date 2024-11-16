@@ -31,11 +31,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable());
         http.authorizeHttpRequests((authz) -> authz
-                                .requestMatchers(HttpMethod.GET, "/*").permitAll()
-                                .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/swagger").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/projects/create_empty_project").permitAll()
-                                .requestMatchers("/health/ping").hasAuthority("ROLE_ADMIN")
+                       //         .requestMatchers(HttpMethod.GET, "/*").permitAll()
                                 //.anyRequest().authenticated());
                                 .anyRequest().permitAll());
 
