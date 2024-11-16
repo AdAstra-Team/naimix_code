@@ -1,11 +1,8 @@
 package org.example.models.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
+import jakarta.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -16,6 +13,9 @@ public class Recruiter {
     private String name;
     private Integer destiny;
     private ArrayList<Integer> signs;
+
+    @OneToMany(mappedBy = "recruiter", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Team> teams = new ArrayList<>();
 
     public UUID getId() {
         return id;
@@ -48,5 +48,12 @@ public class Recruiter {
     public void setSigns(ArrayList<Integer> signs) {
         this.signs = signs;
     }
-}
 
+    public List<Team> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
+    }
+}

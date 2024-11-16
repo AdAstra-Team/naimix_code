@@ -1,16 +1,11 @@
-package org.example.models.entities;
+package org.example.models.dao;
 
-import jakarta.persistence.*;
-import org.example.models.dao.CandidateRequest;
+import org.example.models.entities.Candidate;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
-@Entity
-public class Candidate {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class CandidateResponse {
     private UUID id;
     private String name;
     private String surname;
@@ -19,16 +14,15 @@ public class Candidate {
     private Integer destiny;
     private Integer sign;
 
-    public Candidate(CandidateRequest candidateRequest, int destiny){
-        name = candidateRequest.getName();
-        surname = candidateRequest.getSurname();
-        photo = candidateRequest.getPhoto();
-        birthday = candidateRequest.getBirthday();
-        this.destiny = destiny;
-        sign = candidateRequest.getSign();
+    public CandidateResponse(Candidate candidate){
+        id = candidate.getId();
+        name = candidate.getName();
+        surname = candidate.getSurname();
+        photo = candidate.getPhoto();
+        birthday = candidate.getBirthday();
+        destiny = candidate.getDestiny();
+        sign = candidate.getSign();
     }
-    @ManyToMany(mappedBy = "candidates")
-    private List<Team> teams = new ArrayList<>();
 
     public UUID getId() {
         return id;
@@ -84,13 +78,5 @@ public class Candidate {
 
     public void setSign(Integer sign) {
         this.sign = sign;
-    }
-
-    public List<Team> getTeams() {
-        return teams;
-    }
-
-    public void setTeams(List<Team> teams) {
-        this.teams = teams;
     }
 }
