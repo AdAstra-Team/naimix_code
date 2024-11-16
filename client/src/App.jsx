@@ -8,6 +8,7 @@ import Profile from "./Pages/Profile";
 import Candidates from "./Pages/Candidates";
 import Teams from "./Pages/Teams";
 import Header from "./Components/Header";
+import SignInUpPage from "./Pages/SignInUpPage"
 
 const App = () => {
 
@@ -23,6 +24,7 @@ const App = () => {
             <Route path="/profile" element={<Profile />} />
             <Route path="/candidates" element={<Candidates />} />
             <Route path="/teams" element={<Teams />} />
+            <Route path="/SignInUpPage" element={<SignInUpPage/>} />
           </Routes>
         </div>
       </div>

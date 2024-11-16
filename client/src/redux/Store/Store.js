@@ -1,5 +1,5 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import UserSlice from '../Slices/UserSlice';
+import authReducer from '../Slices/UserSlice';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // Используем localStorage
 
@@ -11,8 +11,7 @@ const persistConfig = {
 
 // Combine all reducers
 const rootReducer = combineReducers({
-  User: UserSlice,
-  // auth: authReducer,
+  auth: authReducer,
   // projects: projectReducer,
   // tasks: taskReducer,
 });
