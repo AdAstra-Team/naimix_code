@@ -92,7 +92,7 @@ const LoginForm = () => {
                             type="submit"
                             disabled={loading}
                         >
-                            {loading ? "Signing In..." : "Sign In"}
+                            {loading ? "Signing In..." : "Login"}
                         </button>
                         
                         <a href="/SignInUpPage/#signup" className="px-4 py-2 rounded">
