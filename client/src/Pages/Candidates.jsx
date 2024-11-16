@@ -2,7 +2,6 @@ import React from "react";
 import { generateRandomUsers } from "../Utils/utils";
 import UserCard from "../Components/UserCard";
 import CandidateAddForm from "../Components/CandidateAddForm";
-import CandidateTaro from "../Components/CandidateTaro";
 import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
