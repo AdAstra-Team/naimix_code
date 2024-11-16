@@ -9,7 +9,9 @@ import org.example.services.DestinyComputeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/candidate")
@@ -30,6 +32,14 @@ public class CandidateController {
     @GetMapping("/{id}")
     public CandidateResponse getCandidateById(@PathVariable UUID id) {
         return new CandidateResponse(candidateService.getCandidateById(id));
+    }
+
+    @GetMapping("/{teamId}")
+    public List<CandidateResponse> getCandidatesByTeamId(@PathVariable UUID teamId) {
+        return candidateService.getCandidatesByTeamId(teamId).stream()
+                .map(CandidateResponse::new)
+                .collect(Collectors.toList());
+        // TODO: sort cumdidates
     }
 
     @PostMapping()

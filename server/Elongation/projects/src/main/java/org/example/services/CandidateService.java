@@ -1,9 +1,7 @@
 package org.example.services;
 
 import org.example.models.entities.Candidate;
-import org.example.models.entities.Project;
 import org.example.repositories.CandidateRepository;
-import org.example.repositories.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +19,10 @@ public class CandidateService {
 
     public List<Candidate> getAll() {
         return candidateRepository.findAll();
+    }
+
+    public List<Candidate> getCandidatesByTeamId(UUID teamId) {
+        return candidateRepository.findByTeams(teamId);
     }
 
     public Candidate getCandidateById(UUID id) {
