@@ -24,7 +24,7 @@ const Candidates = () => {
 
   const handleOpenTaroCandidatePage = (userId) => {
     navigate(`/candidates/${teamId}/taro?userId=${userId}`);
-  }
+  };
 
   return (
     <>

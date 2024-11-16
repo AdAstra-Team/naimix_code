@@ -3,8 +3,7 @@ import { setAuth } from "../redux/Slices/UserSlice";
 import bcrypt, { hash } from "bcryptjs";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
-
+import fetch from "../Utils/fetch";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
@@ -20,38 +19,30 @@ const LoginForm = () => {
     setError(null);
 
     try {
-        const salt = bcrypt.genSaltSync(10);
-        const hashedPassword = bcrypt.hashSync(password, salt);
+      const salt = bcrypt.genSaltSync(10);
+      const hashedPassword = bcrypt.hashSync(password, salt);
 
-        const response = await axios.post(
-            'http://194.87.186.59:8082/recruiter/auth',
-            {
-                name: username,
-                passwordHash: hashedPassword,
-            },
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            }
-        );
+      const response = await fetch.post("/recruiter/auth", {
+        name: username,
+        passwordHash: hashedPassword
+      });
 
-        if (!response.status >= 400) {
-            throw new Error("Ошибка авторизации");
-        }
+      if (!response.status >= 400) {
+        throw new Error("Ошибка авторизации");
+      }
 
-        const data = response.data;
-        var token = response.data.access_token;
-        // Разбиваем токен на части
-        const parts = token.split('$');
-        
-        // Получаем payload
-        setUsername(parts[0]);
+      const data = response.data;
+      var token = response.data.access_token;
+      // Разбиваем токен на части
+      const parts = token.split("$");
 
-        // Здесь вы можете сохранить токен или выполнить другие действия
-        dispatch(setAuth({username, token}));
-        console.log("Успешный вход:", data);
-        navigate("/");
+      // Получаем payload
+      setUsername(parts[0]);
+
+      // Здесь вы можете сохранить токен или выполнить другие действия
+      dispatch(setAuth({ username, token }));
+      console.log("Успешный вход:", data);
+      navigate("/");
     } catch (err) {
       setError(err.message);
     } finally {
