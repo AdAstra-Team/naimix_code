@@ -13,6 +13,7 @@ import SignInUpPage from "./Pages/SignInUpPage";
 import DevComponent from "./Components/devComponent";
 import HelpButton from "./Components/HelpButton";
 import Metrics from "./Pages/Metrics";
+import Landing from "./Pages/Landing"
 
 const App = () => {
   const auth = useSelector((state) => state.auth);
@@ -33,7 +34,6 @@ const App = () => {
           <Navigation />
           <div className="mt-8">
             <Routes>
-              <Route path="/" element={<Navigate to="/profile" />} />
 
               <Route path="/profile" element={<Profile />} />
               <Route path="/candidates" element={<Navigate to="/teams" />} />
@@ -49,6 +49,9 @@ const App = () => {
       ) : (
         <SignInUpPage />
       )}
+      <Routes>
+        <Route path="/" element={<Landing/>}/>
+      </Routes>
       <HelpButton />
     </Router>
   );

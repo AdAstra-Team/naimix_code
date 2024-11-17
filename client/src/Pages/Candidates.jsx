@@ -66,7 +66,7 @@ const Candidates = () => {
         </div>
         {isCreateCandidateModalOpen && (
           <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-25 flex justify-center items-center">
-            <CandidateAddForm onClose={handleCloseCreateCandidateModal} />
+            <CandidateAddForm onClose={handleCloseCreateCandidateModal} teamId={teamId} />
           </div>
         )}
       </>
