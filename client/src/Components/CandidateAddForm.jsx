@@ -28,13 +28,11 @@ const CandidateAddForm = ({ onClose }) => {
       surname: formData.surname,
       photo: [],
       birthday: new Date(formData.dob).getTime() / 1000,
-      sign: SIGNS.findIndex((val, index) => val == formData.zodiac),
+      sign: SIGNS.findIndex((val, index) => val === formData.zodiac),
       typeOfDestinyCompute: 0
     });
 
     onClose();
-
-    console.log(response.data);
   };
 
   return (
