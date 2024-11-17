@@ -5,6 +5,7 @@ import fetch from "../Utils/fetch";
 
 import TaroCard from "../Components/TaroCard";
 import Carousel from "../Components/Carousel";
+import Histogram from "../Components/Histogram";
 
 const cast = {
   title: "Путь откровений",
@@ -41,6 +42,10 @@ const CandidatesTaro = () => {
     fetchTaro();
   }, []);
 
+  const handleGoToMetrics = () => {
+    navigate('/histo');
+  };
+
   return (
     taro && (
       <>
@@ -61,7 +66,7 @@ const CandidatesTaro = () => {
                 <div className="text-iridium">Предназначен для тех, кто ищет ответы на важные жизненные вопросы</div>
               </div>
               <div className="flex flex-col items-baseline gap-4">
-                <div className="font-semibold text-purple">{cast.metrics}</div>
+                <div className="font-semibold text-purple" onClick={handleGoToMetrics}>{cast.metrics}</div>
               </div>
             </div>
             <div className="grow w-full flex items-center">
