@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 
 const Carousel = ({ children }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -26,9 +26,9 @@ const Carousel = ({ children }) => {
       const currentIndex = Math.round(scrollLeft / (cardWidth + 32));
       setCurrentIndex(currentIndex);
     };
-    carousel.addEventListener('scroll', handleScroll);
+    carousel.addEventListener("scroll", handleScroll);
     return () => {
-      carousel.removeEventListener('scroll', handleScroll);
+      carousel.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -36,11 +36,11 @@ const Carousel = ({ children }) => {
     <div className="relative w-full h-full">
       <div
         ref={carouselRef}
-        className="h-full flex items-center overflow-x-auto scroll-smooth snap-x snap-mandatory"
+        className="h-full flex items-center justify-center overflow-x-auto scroll-smooth snap-x snap-mandatory"
         style={{
-          scrollPaddingLeft: '32px',
-          scrollPaddingRight: '32px',
-          scrollSnapType: 'x mandatory',
+          scrollPaddingLeft: "32px",
+          scrollPaddingRight: "32px",
+          scrollSnapType: "x mandatory"
         }}
       >
         {React.Children.map(children, (child, index) => (
@@ -48,7 +48,7 @@ const Carousel = ({ children }) => {
             key={index}
             className="flex-shrink px-4"
             style={{
-              scrollSnapAlign: 'start',
+              scrollSnapAlign: "start"
             }}
           >
             {child}
@@ -61,12 +61,7 @@ const Carousel = ({ children }) => {
           onClick={handlePrev}
           disabled={currentIndex === 0}
         >
-          <svg
-            className="h-6 w-6 text-gray"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
+          <svg className="h-6 w-6 text-gray" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -82,18 +77,8 @@ const Carousel = ({ children }) => {
           onClick={handleNext}
           disabled={currentIndex === React.Children.count(children) - 1}
         >
-          <svg
-            className="h-6 w-6 text-gray"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 5l7 7-7 7"
-            />
+          <svg className="h-6 w-6 text-gray" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </button>
       </div>

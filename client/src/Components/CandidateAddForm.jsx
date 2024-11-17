@@ -1,6 +1,7 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { SIGNS } from "../Utils/constants";
+
+import fetch from "../Utils/fetch";
 
 const CandidateAddForm = ({ onClose }) => {
   const [formData, setFormData] = useState({
@@ -8,7 +9,7 @@ const CandidateAddForm = ({ onClose }) => {
     phone: "",
     email: "",
     dob: "",
-    zodiac: "Рыбы",
+    zodiac: "Рыбы"
   });
 
   const handleChange = (e) => {
@@ -22,21 +23,14 @@ const CandidateAddForm = ({ onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    var response = await axios.post("http://194.87.186.59:8082/candidate", 
-        {
-            name: formData.name,
-            surname: formData.surname,
-            photo: [],
-            birthday: new Date(formData.dob).getTime()/1000,
-            sign: SIGNS.findIndex((val, index) => val == formData.zodiac),
-            typeOfDestinyCompute: 0,
-        },
-        {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        }
-    )
+    await fetch.post("/candidate", {
+      name: formData.name,
+      surname: formData.surname,
+      photo: [],
+      birthday: new Date(formData.dob).getTime() / 1000,
+      sign: SIGNS.findIndex((val, index) => val == formData.zodiac),
+      typeOfDestinyCompute: 0
+    });
 
     onClose();
 
@@ -128,7 +122,9 @@ const CandidateAddForm = ({ onClose }) => {
             value={formData.zodiac}
             onChange={handleChange}
           >
-            {SIGNS.map((item) => (<option>{item}</option>))}
+            {SIGNS.map((item) => (
+              <option>{item}</option>
+            ))}
           </select>
         </div>
 

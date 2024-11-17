@@ -12,7 +12,7 @@ const persistConfig = {
 // Combine all reducers
 const rootReducer = combineReducers({
   auth: authReducer,
-  popup: popupReducer,
+  popup: popupReducer
   // projects: projectReducer,
   // tasks: taskReducer,
 });

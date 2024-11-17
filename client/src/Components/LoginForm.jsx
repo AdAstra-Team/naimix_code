@@ -37,10 +37,11 @@ const LoginForm = () => {
       const parts = token.split("$");
 
       // Получаем payload
-      setUsername(parts[0]);
+      setUsername(parts[1]);
+      const id = parts[0];
 
       // Здесь вы можете сохранить токен или выполнить другие действия
-      dispatch(setAuth({ username, token }));
+      dispatch(setAuth({ username, token, id }));
       console.log("Успешный вход:", data);
       navigate("/");
     } catch (err) {

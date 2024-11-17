@@ -25,9 +25,9 @@ const App = () => {
     <Router>
       <Header />
       {popup.visible && (
-          <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-4 shadow-md rounded-lg">
-              Ура!
-          </div>
+        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-4 shadow-md rounded-lg">
+          Ура!
+        </div>
       )}
       {auth.isAuthenticated ? (
         <div className="mx-auto mt-8">
@@ -37,7 +37,7 @@ const App = () => {
               <Route path="/" element={<Navigate to="/profile" />} />
 
               <Route path="/profile" element={<Profile />} />
-              <Route path="/candidates" element={<Navigate to="/candidates/aboba" />} />
+              <Route path="/candidates" element={<Navigate to="/teams" />} />
               <Route path="/candidates/:teamId" element={<Candidates />} />
               <Route path="/candidates/:teamId/taro" element={<CandidatesTaro />} />
               <Route path="/teams" element={<Teams />} />

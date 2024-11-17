@@ -20,41 +20,39 @@ const SignUpForm = () => {
     setError(null);
 
     try {
-        const salt = bcrypt.genSaltSync(10);
-        const hashedPassword = bcrypt.hashSync(password, salt);
+      const salt = bcrypt.genSaltSync(10);
+      const hashedPassword = bcrypt.hashSync(password, salt);
 
-        const response = await axios.post(
-            'http://194.87.186.59:8082/recruiter/registration',
-            {
-                name: username,
-                passwordHash: hashedPassword
-            },
-            {
-                headers: {
-                    'Accept': '*/*',
-                    'Content-Type': 'application/json'
-                },
-            }
-        );
-
-
-        if (response.status >= 400) {
-            console.log(response.statusText);            
-            throw new Error("Ошибка регистрации");
+      const response = await axios.post(
+        "http://194.87.186.59:8082/recruiter/registration",
+        {
+          name: username,
+          passwordHash: hashedPassword
+        },
+        {
+          headers: {
+            Accept: "*/*",
+            "Content-Type": "application/json"
+          }
         }
+      );
 
-        var token = response.data.access_token;
-        setUsername(response.data.name);
-        var userId = response.data.id;
+      if (response.status >= 400) {
+        console.log(response.statusText);
+        throw new Error("Ошибка регистрации");
+      }
 
-        
-        dispatch(setAuth({token, username}));
-        navigate("/");
-        console.log("Успешный вход:", response.data);
-        } catch (err) {
-        setError(err.message);
-        } finally {
-        setLoading(false);
+      var token = response.data.access_token;
+      setUsername(response.data.name);
+      var id = response.data.id;
+
+      dispatch(setAuth({ token, username, id }));
+      navigate("/");
+      console.log("Успешный вход:", response.data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
   return (

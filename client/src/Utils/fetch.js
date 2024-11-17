@@ -16,7 +16,14 @@ const fetch = {
         "Content-Type": "application/json"
       },
       ...options
-    })
+    }),
+  delete: async (path, data, options) =>
+    axios.delete(`${API_HOST}${path}`, data, {
+      headers: {
+        "Content-Type": "application/json"
+      },
+      ...options
+    }),
 };
 
 export default fetch;
