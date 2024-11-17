@@ -35,7 +35,7 @@ const App = () => {
           <Navigation />
           <div className="mt-8">
             <Routes>
-              <Route path="/" element={<Navigate to="/profile" />} />
+              <Route path="/" element={<Landing/>} />
               <Route path="/histo" element={<Histogram />}/>
               <Route path="/profile" element={<Profile />} />
               <Route path="/candidates" element={<Navigate to="/teams" />} />
