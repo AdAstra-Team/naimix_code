@@ -47,7 +47,9 @@ const Candidates = () => {
             >
               Добавить кандидата
             </button>
-            <div className="text-lg">Управление кандидатами <span className="text-red font-semibold">{team.name}</span></div>
+            <div className="text-lg">
+              Управление кандидатами <span className="text-red font-semibold">{team.name}</span>
+            </div>
           </div>
           <div className="flex flex-wrap gap-8 justify-center mt-8">
             {team.candidates.map((user, index) => (

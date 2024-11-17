@@ -37,14 +37,11 @@ const TeamAddForm = ({ onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await fetch.post(
-      "/teams",
-      {
-        name: formData.name,
-        signs: formData.signs.map((sign) => SIGNS.findIndex((val) => val === sign)),
-        recruiterId: auth.id
-      },
-    );
+    await fetch.post("/teams", {
+      name: formData.name,
+      signs: formData.signs.map((sign) => SIGNS.findIndex((val) => val === sign)),
+      recruiterId: auth.id
+    });
 
     onClose();
 

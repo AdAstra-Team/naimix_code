@@ -15,11 +15,9 @@ import HelpButton from "./Components/HelpButton";
 
 const App = () => {
   const auth = useSelector((state) => state.auth);
-  const popup = useSelector((state) => state.popup)
-  
-  const handleSupportClick = () => {
-    
-  };
+  const popup = useSelector((state) => state.popup);
+
+  const handleSupportClick = () => {};
 
   return (
     <Router>

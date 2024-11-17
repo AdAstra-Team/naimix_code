@@ -15,7 +15,7 @@ const SupportButton = () => {
       fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message }),
+        body: JSON.stringify({ message })
       })
         .then((response) => response.json())
         .then((data) => {
@@ -28,7 +28,7 @@ const SupportButton = () => {
           console.error("Error sending message:", error);
           alert("Ваше сообщение было отправлено!!");
         });
-				setTextboxVisible(false);
+      setTextboxVisible(false);
     }
   };
 

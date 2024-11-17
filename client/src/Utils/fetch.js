@@ -23,7 +23,7 @@ const fetch = {
         "Content-Type": "application/json"
       },
       ...options
-    }),
+    })
 };
 
 export default fetch;
