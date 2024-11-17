@@ -3,7 +3,7 @@ import React from "react";
 function Metrics() {
     return (
       <div className="h-screen">
-        <iframe className="h-4/6"
+        <iframe className="h-screen"
           src="https://detulie.space/stat/public-dashboards/f595916889c547a38a0d1f9fae9601f4"
           title="Embedded Site"
           style={{
