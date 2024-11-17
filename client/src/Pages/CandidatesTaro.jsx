@@ -7,9 +7,9 @@ import TaroCard from "../Components/TaroCard";
 import Carousel from "../Components/Carousel";
 
 const cast = {
-  title: "Какой-то расклад",
+  title: "Путь откровений",
   metrics: "Метрики",
-  summary: "Тута какая-та сводка по таро"
+  summary: "Система гадательных карт для самопознания, предсказания будущего и анализа текущих ситуаций."
 };
 
 const CandidatesTaro = () => {
@@ -58,7 +58,7 @@ const CandidatesTaro = () => {
             <div className="w-full max-w-[1320px] flex justify-between">
               <div className="flex gap-4 items-baseline">
                 <div className="text-lg font-semibold">{cast.title}</div>
-                <div className="text-iridium">Информация о раскладе</div>
+                <div className="text-iridium">Предназначен для тех, кто ищет ответы на важные жизненные вопросы</div>
               </div>
               <div className="flex flex-col items-baseline gap-4">
                 <div className="font-semibold text-purple">{cast.metrics}</div>
