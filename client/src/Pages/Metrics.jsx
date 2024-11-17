@@ -2,9 +2,9 @@ import React from "react";
 
 function Metrics() {
     return (
-      <div className="h-screen" style={{ border: "1px solid #ccc", padding: "10px"}}>
-        <iframe className="h-screen"
-          src="http://detulie.space/stat/public-dashboards/c33cba9873c04003ba28abf14e0ec2f9"
+      <div className="h-screen">
+        <iframe className="h-4/6"
+          src="https://detulie.space/stat/public-dashboards/f595916889c547a38a0d1f9fae9601f4"
           title="Embedded Site"
           style={{
             width: "100%",
