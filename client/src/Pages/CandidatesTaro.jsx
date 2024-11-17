@@ -5,6 +5,7 @@ import fetch from "../Utils/fetch";
 
 import TaroCard from "../Components/TaroCard";
 import Carousel from "../Components/Carousel";
+import Histogram from "../Components/Histogram";
 
 const cast = {
   title: "Какой-то расклад",
@@ -41,6 +42,10 @@ const CandidatesTaro = () => {
     fetchTaro();
   }, []);
 
+  const handleGoToMetrics = () => {
+    navigate('/histo');
+  };
+
   return (
     taro && (
       <>
@@ -61,7 +66,7 @@ const CandidatesTaro = () => {
                 <div className="text-iridium">Информация о раскладе</div>
               </div>
               <div className="flex flex-col items-baseline gap-4">
-                <div className="font-semibold text-purple">{cast.metrics}</div>
+                <div className="font-semibold text-purple" onClick={handleGoToMetrics}>{cast.metrics}</div>
               </div>
             </div>
             <div className="grow w-full flex items-center">
@@ -70,6 +75,9 @@ const CandidatesTaro = () => {
                   <TaroCard key={index} data={item} rev={Math.random() < 0.5} />
                 ))}
               </Carousel>
+            </div>
+            <div>
+              <Histogram />
             </div>
             <div className="w-full max-w-[1320px] flex justify-between">
               <div className="flex items-center">{cast.summary}</div>

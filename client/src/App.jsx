@@ -13,6 +13,7 @@ import SignInUpPage from "./Pages/SignInUpPage";
 import DevComponent from "./Components/devComponent";
 import HelpButton from "./Components/HelpButton";
 import Metrics from "./Pages/Metrics";
+import Histogram from "./Components/Histogram";
 
 const App = () => {
   const auth = useSelector((state) => state.auth);
@@ -34,7 +35,7 @@ const App = () => {
           <div className="mt-8">
             <Routes>
               <Route path="/" element={<Navigate to="/profile" />} />
-
+              <Route path="/histo" element={<Histogram />}/>
               <Route path="/profile" element={<Profile />} />
               <Route path="/candidates" element={<Navigate to="/teams" />} />
               <Route path="/candidates/:teamId" element={<Candidates />} />
