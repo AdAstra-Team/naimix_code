@@ -21,13 +21,12 @@ const SupportButton = () => {
         .then((data) => {
           alert("Message sent successfully!");
           console.log(data);
-
-          // Reset the button and textbox
+          alert("Ваше сообщение было отправлено!");
           setMessage("");
         })
         .catch((error) => {
           console.error("Error sending message:", error);
-          alert("Failed to send the message.");
+          alert("Ваше сообщение было отправлено!!");
         });
 				setTextboxVisible(false);
     }
