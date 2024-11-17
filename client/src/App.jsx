@@ -12,6 +12,7 @@ import Header from "./Components/Header";
 import SignInUpPage from "./Pages/SignInUpPage";
 import DevComponent from "./Components/devComponent";
 import HelpButton from "./Components/HelpButton";
+import Metrics from "./Pages/Metrics";
 
 const App = () => {
   const auth = useSelector((state) => state.auth);
@@ -41,6 +42,7 @@ const App = () => {
               <Route path="/teams" element={<Teams />} />
               <Route path="/SignInUpPage" element={<SignInUpPage />} />
               <Route path="/devPath" element={<DevComponent />} />
+              <Route path="/metrics" element={<Metrics />} />
             </Routes>
           </div>
         </div>
