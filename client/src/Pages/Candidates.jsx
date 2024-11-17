@@ -3,11 +3,52 @@ import UserCard from "../Components/UserCard";
 import CandidateAddForm from "../Components/CandidateAddForm";
 import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
 
 import fetch from "../Utils/fetch";
 
 const Candidates = () => {
   const navigate = useNavigate();
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  const [currentPage, setCurrentPage] = useState(1);
+  // const [users, setUsers] = useState([]);
+  const [totalPages, setTotalPages] = useState(1);
+  const usersPerPage = 10;
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+        const response = await axios.get(`http://194.87.186.59:8082/candidate/page?offset=${(currentPage - 1) * usersPerPage}&limit=${usersPerPage}`);
+        const data = response.data;
+        setUsers(data.candidates);
+        // setTotalPages(Math.ceil(data.total / usersPerPage));
+    };
+
+    fetchUsers();
+}, [currentPage]);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+        setCurrentPage(currentPage + 1);
+    }
+};
+
+const handlePreviousPage = () => {
+    if (currentPage > 1) {
+        setCurrentPage(currentPage - 1);
+    }
+};
+
+const handlePageClick = (pageNumber) => {
+    setCurrentPage(pageNumber);
+};
+
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   const { teamId = "Некой команды" } = useParams();
 
