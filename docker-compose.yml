@@ -3,7 +3,7 @@ version: '3.4'
 services:
   projects:
     build:
-      dockerfile:  ./server/CRM_hack/projects/Dockerfile
+      dockerfile:  ./server/Elongation/projects/Dockerfile
     ports:
       - "8082:8082"
     restart: always
