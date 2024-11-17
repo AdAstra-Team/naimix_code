@@ -3,7 +3,7 @@ import { SIGNS } from "../Utils/constants";
 
 import fetch from "../Utils/fetch";
 
-const CandidateAddForm = ({ onClose }) => {
+const CandidateAddForm = ({ onClose, teamId }) => {
   const [formData, setFormData] = useState({
     fio: "",
     phone: "",
@@ -30,6 +30,19 @@ const CandidateAddForm = ({ onClose }) => {
       birthday: new Date(formData.dob).getTime() / 1000,
       sign: SIGNS.findIndex((val, index) => val === formData.zodiac),
       typeOfDestinyCompute: 0
+    }).then((res) => {
+      fetch("candidate/link", {
+        method: "PATCH",
+        headers:{
+          'Accept': '*/*',
+          'Content-Type': 'application/json',
+        },
+        body: {
+          candidateId: res.Id,
+          teamId: teamId
+        }
+      });
+      console.Log("слинкова произошла");
     });
 
     onClose();

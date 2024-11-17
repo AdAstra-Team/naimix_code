@@ -14,6 +14,7 @@ import DevComponent from "./Components/devComponent";
 import HelpButton from "./Components/HelpButton";
 import Metrics from "./Pages/Metrics";
 import Histogram from "./Components/Histogram";
+import Landing from "./Pages/Landing"
 
 const App = () => {
   const auth = useSelector((state) => state.auth);
@@ -50,6 +51,9 @@ const App = () => {
       ) : (
         <SignInUpPage />
       )}
+      <Routes>
+        <Route path="/" element={<Landing/>}/>
+      </Routes>
       <HelpButton />
     </Router>
   );
