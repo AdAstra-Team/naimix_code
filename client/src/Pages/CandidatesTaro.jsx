@@ -76,9 +76,6 @@ const CandidatesTaro = () => {
                 ))}
               </Carousel>
             </div>
-            <div>
-              <Histogram />
-            </div>
             <div className="w-full max-w-[1320px] flex justify-between">
               <div className="flex items-center">{cast.summary}</div>
               <div className="flex gap-4 items-center justify-end">
