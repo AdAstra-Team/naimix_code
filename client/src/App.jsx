@@ -11,11 +11,15 @@ import Teams from "./Pages/Teams";
 import Header from "./Components/Header";
 import SignInUpPage from "./Pages/SignInUpPage";
 import DevComponent from "./Components/devComponent";
+import HelpButton from "./Components/HelpButton";
 
 const App = () => {
   const auth = useSelector((state) => state.auth);
   const popup = useSelector((state) => state.popup)
 
+  const handleSupportClick = () => {
+    alert("Contact Tech Support!"); // Replace this logic with your actual tech support action
+  };
 
   return (
     <Router>
@@ -45,6 +49,7 @@ const App = () => {
       ) : (
         <SignInUpPage />
       )}
+      <HelpButton />
     </Router>
   );
 };
