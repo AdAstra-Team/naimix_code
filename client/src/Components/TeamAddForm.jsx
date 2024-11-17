@@ -35,6 +35,7 @@ const TeamAddForm = ({ onClose }) => {
   };
 
   const handleSubmit = async (e) => {
+    try {
     e.preventDefault();
 
     await fetch.post("/teams", {
@@ -44,8 +45,11 @@ const TeamAddForm = ({ onClose }) => {
     });
 
     onClose();
-
-    console.log(formData);
+    }
+    finally {
+      console.log(formData);
+      console.log(auth.id, auth.username);
+    }
   };
 
   return (
