@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { SIGNS } from "../Utils/constants";
 
 import fetch from "../Utils/fetch";
+import axios from "axios";
 
 const CandidateAddForm = ({ onClose, teamId }) => {
   const [formData, setFormData] = useState({
@@ -23,26 +24,35 @@ const CandidateAddForm = ({ onClose, teamId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await fetch.post("/candidate", {
+    var reponseMain = await fetch.post("/candidate", {
       name: formData.name,
       surname: formData.surname,
       photo: [],
       birthday: new Date(formData.dob).getTime() / 1000,
       sign: SIGNS.findIndex((val, index) => val === formData.zodiac),
       typeOfDestinyCompute: 0
-    }).then((res) => {
-      fetch("candidate/link", {
-        method: "PATCH",
-        headers:{
+    }).then(async (res) => {
+      const data = {
+        candidateId: res.data.id,
+        teamId: teamId,
+      };
+      
+      const config = {
+        headers: {
           'Accept': '*/*',
-          'Content-Type': 'application/json',
-        },
-        body: {
-          candidateId: res.Id,
-          teamId: teamId
+          'Content-Type': 'application/json'
         }
-      });
-      console.Log("слинкова произошла");
+      };
+      
+      var response = await axios.patch('http://194.87.186.59:8082/candidate/link', data, config)
+        .then(response => {
+          console.log(response.data);
+          console.log("слинкова произошла");
+        })
+        .catch(error => {
+          console.error(error);
+        });
+        
     });
 
     onClose();
